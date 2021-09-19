@@ -200,6 +200,46 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
+/***/ "./src/ui/menu/MenuBuilder.ts":
+/*!************************************!*\
+  !*** ./src/ui/menu/MenuBuilder.ts ***!
+  \************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nclass MenuBuilder {\r\n    build(menus) {\r\n        const els = [];\r\n        for (const menuItem of menus) {\r\n            els.push((0, skynode_1.el)(`a${location.pathname === `/${menuItem.uri}` ? \".on\" : \"\"}`, menuItem.name, { click: () => skyrouter_1.SkyRouter.go(`/${menuItem.uri}`) }));\r\n        }\r\n        return els;\r\n    }\r\n}\r\nexports[\"default\"] = new MenuBuilder();\r\n\n\n//# sourceURL=webpack:///./src/ui/menu/MenuBuilder.ts?");
+
+/***/ }),
+
+/***/ "./src/ui/menu/MobileMenu.ts":
+/*!***********************************!*\
+  !*** ./src/ui/menu/MobileMenu.ts ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst menu_json_1 = __importDefault(__webpack_require__(/*! ./menu.json */ \"./src/ui/menu/menu.json\"));\r\nconst usermenu_json_1 = __importDefault(__webpack_require__(/*! ./usermenu.json */ \"./src/ui/menu/usermenu.json\"));\r\nconst MenuBuilder_1 = __importDefault(__webpack_require__(/*! ./MenuBuilder */ \"./src/ui/menu/MenuBuilder.ts\"));\r\nclass MobileMenu extends skynode_1.ClosableFloatingDomNode {\r\n    constructor(position) {\r\n        super(position, \".mobile-menu\");\r\n        this.append(...MenuBuilder_1.default.build(menu_json_1.default.menu), ...MenuBuilder_1.default.build(usermenu_json_1.default.menu));\r\n        this.onDom(\"click\", () => this.delete());\r\n    }\r\n}\r\nexports[\"default\"] = MobileMenu;\r\n\n\n//# sourceURL=webpack:///./src/ui/menu/MobileMenu.ts?");
+
+/***/ }),
+
+/***/ "./src/ui/menu/PCMenu.ts":
+/*!*******************************!*\
+  !*** ./src/ui/menu/PCMenu.ts ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst menu_json_1 = __importDefault(__webpack_require__(/*! ./menu.json */ \"./src/ui/menu/menu.json\"));\r\nconst MenuBuilder_1 = __importDefault(__webpack_require__(/*! ./MenuBuilder */ \"./src/ui/menu/MenuBuilder.ts\"));\r\nconst UserMenu_1 = __importDefault(__webpack_require__(/*! ./UserMenu */ \"./src/ui/menu/UserMenu.ts\"));\r\nclass PCMenu extends skynode_1.DomNode {\r\n    constructor() {\r\n        super(\".pc-menu\");\r\n        this.append(...MenuBuilder_1.default.build(menu_json_1.default.menu), (0, skynode_1.el)(\"a.user\", {\r\n            click: (event, button) => {\r\n                const rect = button.rect;\r\n                new UserMenu_1.default({ left: rect.right - 200, top: rect.top + 36 }).appendTo(skynode_1.BodyNode);\r\n            },\r\n        }));\r\n    }\r\n}\r\nexports[\"default\"] = PCMenu;\r\n\n\n//# sourceURL=webpack:///./src/ui/menu/PCMenu.ts?");
+
+/***/ }),
+
+/***/ "./src/ui/menu/UserMenu.ts":
+/*!*********************************!*\
+  !*** ./src/ui/menu/UserMenu.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst MenuBuilder_1 = __importDefault(__webpack_require__(/*! ./MenuBuilder */ \"./src/ui/menu/MenuBuilder.ts\"));\r\nconst usermenu_json_1 = __importDefault(__webpack_require__(/*! ./usermenu.json */ \"./src/ui/menu/usermenu.json\"));\r\nclass UserMenu extends skynode_1.ClosableFloatingDomNode {\r\n    constructor(position) {\r\n        super(position, \".user-menu\");\r\n        this.append(...MenuBuilder_1.default.build(usermenu_json_1.default.menu));\r\n        this.onDom(\"click\", () => this.delete());\r\n    }\r\n}\r\nexports[\"default\"] = UserMenu;\r\n\n\n//# sourceURL=webpack:///./src/ui/menu/UserMenu.ts?");
+
+/***/ }),
+
 /***/ "./src/view/Collection.ts":
 /*!********************************!*\
   !*** ./src/view/Collection.ts ***!
@@ -244,9 +284,9 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /*!****************************!*\
   !*** ./src/view/Layout.ts ***!
   \****************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = (0, skynode_1.el)(\".layout\", (0, skynode_1.el)(\"header\"), (0, skynode_1.el)(\"main\", this.content = (0, skynode_1.el)(\".content\"))));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports[\"default\"] = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst MobileMenu_1 = __importDefault(__webpack_require__(/*! ../ui/menu/MobileMenu */ \"./src/ui/menu/MobileMenu.ts\"));\r\nconst PCMenu_1 = __importDefault(__webpack_require__(/*! ../ui/menu/PCMenu */ \"./src/ui/menu/PCMenu.ts\"));\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = (0, skynode_1.el)(\".layout\", (0, skynode_1.el)(\"header\", (0, skynode_1.el)(\"a.menu-button\", (0, skynode_1.el)(\"i.fas.fa-bars\"), {\r\n            click: (event, button) => {\r\n                const rect = button.rect;\r\n                new MobileMenu_1.default({ left: rect.right - 180, top: rect.bottom }).appendTo(skynode_1.BodyNode);\r\n            },\r\n        }), new PCMenu_1.default()), (0, skynode_1.el)(\"main\", this.content = (0, skynode_1.el)(\".content\"))));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports[\"default\"] = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
 
 /***/ }),
 
@@ -317,6 +357,26 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ../Layout */ \"./src/view/Layout.ts\"));\r\nclass MyNFTs {\r\n    constructor() {\r\n        Layout_1.default.current.content.append(this.container = (0, skynode_1.el)(\".my-nfts-view\"));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports[\"default\"] = MyNFTs;\r\n\n\n//# sourceURL=webpack:///./src/view/user/MyNFTs.ts?");
+
+/***/ }),
+
+/***/ "./src/ui/menu/menu.json":
+/*!*******************************!*\
+  !*** ./src/ui/menu/menu.json ***!
+  \*******************************/
+/***/ ((module) => {
+
+eval("module.exports = JSON.parse('{\"menu\":[{\"uri\":\"marketplace\",\"name\":\"Marketplace\"},{\"uri\":\"ranking\",\"name\":\"Ranking\"},{\"uri\":\"create\",\"name\":\"Create\"}]}');\n\n//# sourceURL=webpack:///./src/ui/menu/menu.json?");
+
+/***/ }),
+
+/***/ "./src/ui/menu/usermenu.json":
+/*!***********************************!*\
+  !*** ./src/ui/menu/usermenu.json ***!
+  \***********************************/
+/***/ ((module) => {
+
+eval("module.exports = JSON.parse('{\"menu\":[{\"uri\":\"user/my-nfts\",\"name\":\"My NFTs\"},{\"uri\":\"user/my-collections\",\"name\":\"My Collections\"}]}');\n\n//# sourceURL=webpack:///./src/ui/menu/usermenu.json?");
 
 /***/ })
 

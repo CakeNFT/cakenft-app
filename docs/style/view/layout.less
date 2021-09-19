@@ -1,0 +1,22 @@
+.layout {
+    >header {
+        >.pc-menu {
+            @media @phone {
+                display: none;
+            }
+        }
+
+        >.menu-button {
+            display : none;
+            position: fixed;
+            right   : 10px;
+            top     : 12px;
+            z-index : 2;
+            padding : 10px;
+
+            @media @phone {
+                display: block;
+            }
+        }
+    }
+}
