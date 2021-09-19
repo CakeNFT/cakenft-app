@@ -1,0 +1,11 @@
+{
+    "menu": [{
+            "uri": "user/my-nfts",
+            "name": "My NFTs"
+        },
+        {
+            "uri": "user/my-collections",
+            "name": "My Collections"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "menu": [{
+            "uri": "marketplace",
+            "name": "Marketplace"
+        },
+        {
+            "uri": "ranking",
+            "name": "Ranking"
+        },
+        {
+            "uri": "create",
+            "name": "Create"
+        }
+    ]
+}
