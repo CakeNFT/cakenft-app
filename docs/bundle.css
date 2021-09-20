@@ -189,6 +189,7 @@ a {
   border-bottom: 1px solid #e7e3eb;
   padding: 4px 16px;
   box-shadow: rgba(4, 17, 29, 0.25) 0px 0px 8px 0px;
+  background-color: #ffffff;
 }
 .layout > header > .logo {
   display: flex;
@@ -254,6 +255,30 @@ a {
   padding: 20px 0;
   border-top: 1px solid #383241;
   color: #b8add2;
+}
+.home-view > header {
+  background-color: #e9f9ff;
+  padding: 48px;
+}
+.home-view > header > h2 {
+  font-size: 64px;
+  color: #7645d9;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.home-view > header > .trade-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: #1fc7d4;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px 0px inset;
+}
+.home-view > header > .trade-button:hover {
+  background-color: #6edbe3;
 }
 .user-info > .connect-button {
   display: flex;

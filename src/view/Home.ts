@@ -1,5 +1,5 @@
 import { DomNode, el } from "@hanul/skynode";
-import { View, ViewParams } from "skyrouter";
+import { SkyRouter, View, ViewParams } from "skyrouter";
 import Layout from "./Layout";
 
 export default class Home implements View {
@@ -8,7 +8,12 @@ export default class Home implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el(".home-view",
-            "Home",
+            el("header",
+                el("h2", "Trade NFT, Earn Cake"),
+                el("a.trade-button", "Trade Now", {
+                    click: () => SkyRouter.go("marketplace"),
+                }),
+            ),
         ));
     }
 
