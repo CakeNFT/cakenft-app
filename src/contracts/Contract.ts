@@ -1,8 +1,8 @@
 import { ContractInterface, ethers } from "ethers";
 import EventContainer from "eventcontainer";
-import Config from "../Config";
 import NetworkProvider from "../bsc/NetworkProvider";
 import Wallet from "../bsc/Wallet";
+import Config from "../Config";
 
 export default abstract class Contract<CT extends ethers.Contract> extends EventContainer {
 
@@ -31,6 +31,19 @@ export default abstract class Contract<CT extends ethers.Contract> extends Event
                 this.walletContract = new ethers.Contract(this.address, this.abi, Wallet.provider).connect(Wallet.signer) as CT;
             }
             return this.walletContract;
+        }
+    }
+
+    public static async deployContract(abi: any, bytecode: string, ...args: any[]) {
+        if (await Wallet.loadChainId() !== Config.chainId) {
+            alert("Wrong Network");
+        } else {
+            if (await Wallet.connected() !== true) {
+                await Wallet.connect();
+            }
+            const factory = new ethers.ContractFactory(abi, bytecode, Wallet.signer);
+            const contract = await factory.deploy(...args);
+            return contract.address;
         }
     }
 }

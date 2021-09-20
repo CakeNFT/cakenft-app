@@ -30,6 +30,7 @@ interface ICakeNFTInterface extends ethers.utils.Interface {
     "deployer()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "massMint(uint256)": FunctionFragment;
     "mint()": FunctionFragment;
     "name()": FunctionFragment;
     "nonces(uint256)": FunctionFragment;
@@ -69,6 +70,10 @@ interface ICakeNFTInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "massMint",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "mint", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -146,6 +151,7 @@ interface ICakeNFTInterface extends ethers.utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "massMint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
@@ -270,6 +276,16 @@ export class ICakeNFT extends Contract {
       operator: string,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
+
+    massMint(
+      count: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "massMint(uint256)"(
+      count: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
 
     mint(overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -472,6 +488,16 @@ export class ICakeNFT extends Contract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  massMint(
+    count: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "massMint(uint256)"(
+    count: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   mint(overrides?: Overrides): Promise<ContractTransaction>;
 
   "mint()"(overrides?: Overrides): Promise<ContractTransaction>;
@@ -663,6 +689,13 @@ export class ICakeNFT extends Contract {
       operator: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    massMint(count: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    "massMint(uint256)"(
+      count: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     mint(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -880,6 +913,13 @@ export class ICakeNFT extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    massMint(count: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    "massMint(uint256)"(
+      count: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     mint(overrides?: Overrides): Promise<BigNumber>;
 
     "mint()"(overrides?: Overrides): Promise<BigNumber>;
@@ -1090,6 +1130,16 @@ export class ICakeNFT extends Contract {
       owner: string,
       operator: string,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    massMint(
+      count: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "massMint(uint256)"(
+      count: BigNumberish,
+      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     mint(overrides?: Overrides): Promise<PopulatedTransaction>;

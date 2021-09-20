@@ -4,8 +4,8 @@ import { ContractFactory, Overrides } from "@ethersproject/contracts";
 import type { CakeNFTStore } from "../CakeNFTStore";
 export declare class CakeNFTStore__factory extends ContractFactory {
     constructor(signer?: Signer);
-    deploy(_cake: string, _cakeStaker: string, _ownerVault: string, _vault: string, overrides?: Overrides): Promise<CakeNFTStore>;
-    getDeployTransaction(_cake: string, _cakeStaker: string, _ownerVault: string, _vault: string, overrides?: Overrides): TransactionRequest;
+    deploy(_cake: string, _cakeStaker: string, _ownerVault: string, _vault: string, _oracle: string, overrides?: Overrides): Promise<CakeNFTStore>;
+    getDeployTransaction(_cake: string, _cakeStaker: string, _ownerVault: string, _vault: string, _oracle: string, overrides?: Overrides): TransactionRequest;
     attach(address: string): CakeNFTStore;
     connect(signer: Signer): CakeNFTStore__factory;
     static connect(address: string, signerOrProvider: Signer | Provider): CakeNFTStore;

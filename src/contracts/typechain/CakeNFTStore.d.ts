@@ -46,6 +46,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "nftDeployers(address)": FunctionFragment;
     "offer(address,uint256,uint256)": FunctionFragment;
     "offers(address,uint256,uint256)": FunctionFragment;
+    "oracle()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerFee()": FunctionFragment;
     "ownerVault()": FunctionFragment;
@@ -55,7 +56,8 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "sell(address,uint256,uint256)": FunctionFragment;
     "sellWithPermit(address,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "set(address,uint256,uint256)": FunctionFragment;
-    "setNFTDeployer(address,address,uint256,uint256)": FunctionFragment;
+    "setNFTDeployer(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "setOracle(address)": FunctionFragment;
     "setOwnerFee(uint256)": FunctionFragment;
     "stakedCakeBalances(address,uint256)": FunctionFragment;
     "totalStakedCakeBalance()": FunctionFragment;
@@ -163,6 +165,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "offers",
     values: [string, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "oracle", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "ownerFee", values?: undefined): string;
   encodeFunctionData(
@@ -203,8 +206,9 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setNFTDeployer",
-    values: [string, string, BigNumberish, BigNumberish]
+    values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
+  encodeFunctionData(functionFragment: "setOracle", values: [string]): string;
   encodeFunctionData(
     functionFragment: "setOwnerFee",
     values: [BigNumberish]
@@ -278,6 +282,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "offer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offers", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerVault", data: BytesLike): Result;
@@ -300,6 +305,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "setNFTDeployer",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setOracle", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setOwnerFee",
     data: BytesLike
@@ -683,6 +689,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<[string, BigNumber] & { offeror: string; price: BigNumber }>;
 
+    oracle(overrides?: CallOverrides): Promise<[string]>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<[string]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -778,14 +788,26 @@ export class CakeNFTStore extends Contract {
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "setNFTDeployer(address,address,uint256,uint256)"(
+    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    setOracle(
+      _oracle: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "setOracle(address)"(
+      _oracle: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -1154,6 +1176,10 @@ export class CakeNFTStore extends Contract {
     overrides?: CallOverrides
   ): Promise<[string, BigNumber] & { offeror: string; price: BigNumber }>;
 
+  oracle(overrides?: CallOverrides): Promise<string>;
+
+  "oracle()"(overrides?: CallOverrides): Promise<string>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1249,14 +1275,26 @@ export class CakeNFTStore extends Contract {
     deployer: string,
     staking: BigNumberish,
     fee: BigNumberish,
+    signature: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "setNFTDeployer(address,address,uint256,uint256)"(
+  "setNFTDeployer(address,address,uint256,uint256,bytes)"(
     nft: string,
     deployer: string,
     staking: BigNumberish,
     fee: BigNumberish,
+    signature: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  setOracle(
+    _oracle: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "setOracle(address)"(
+    _oracle: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -1625,6 +1663,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<[string, BigNumber] & { offeror: string; price: BigNumber }>;
 
+    oracle(overrides?: CallOverrides): Promise<string>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<string>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1720,14 +1762,23 @@ export class CakeNFTStore extends Contract {
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setNFTDeployer(address,address,uint256,uint256)"(
+    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setOracle(_oracle: string, overrides?: CallOverrides): Promise<void>;
+
+    "setOracle(address)"(
+      _oracle: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2160,6 +2211,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    oracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2255,14 +2310,23 @@ export class CakeNFTStore extends Contract {
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "setNFTDeployer(address,address,uint256,uint256)"(
+    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    setOracle(_oracle: string, overrides?: Overrides): Promise<BigNumber>;
+
+    "setOracle(address)"(
+      _oracle: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -2605,6 +2669,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    oracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "oracle()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2700,14 +2768,26 @@ export class CakeNFTStore extends Contract {
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "setNFTDeployer(address,address,uint256,uint256)"(
+    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
       fee: BigNumberish,
+      signature: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    setOracle(
+      _oracle: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "setOracle(address)"(
+      _oracle: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 

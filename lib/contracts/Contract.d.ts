@@ -7,5 +7,6 @@ export default abstract class Contract<CT extends ethers.Contract> extends Event
     protected contract: CT;
     constructor(address: string, abi: ContractInterface, eventNames: string[]);
     loadWalletContract(): Promise<CT | undefined>;
+    static deployContract(abi: any, bytecode: string, ...args: any[]): Promise<string | undefined>;
 }
 //# sourceMappingURL=Contract.d.ts.map

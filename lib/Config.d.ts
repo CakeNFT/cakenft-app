@@ -4,6 +4,7 @@ declare const _default: {
     contracts: {
         Cake: string;
         CakeNFTStore: string;
+        CakeSimpleNFTV1: string;
     };
 };
 export default _default;
