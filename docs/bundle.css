@@ -280,6 +280,59 @@ a {
 .home-view > header > .trade-button:hover {
   background-color: #6edbe3;
 }
+.create-view {
+  background-color: #faf9fa;
+}
+.create-view > main {
+  max-width: 720px;
+  padding: 50px 20px;
+  margin: auto;
+}
+.create-view > main > h1 {
+  color: #7645d9;
+  font-size: 64px;
+  font-weight: bold;
+  padding-bottom: 32px;
+  border-bottom: 2px solid #7a6eaa;
+}
+.create-view > main > section {
+  margin-top: 48px;
+}
+.create-view > main > section > h2 {
+  color: #7645d9;
+  font-size: 40px;
+  font-weight: bold;
+}
+.create-view > main > section > p {
+  margin-top: 12px;
+  color: #280d5f;
+  font-size: 24px;
+  font-weight: bold;
+}
+.create-view > main > section > p > a {
+  text-decoration: underline;
+}
+.create-view > main > section > a {
+  margin-top: 32px;
+  display: block;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e7e3eb;
+  border-bottom-width: 4px;
+}
+.create-view > main > section > a > h3 {
+  color: #280d5f;
+  font-size: 24px;
+  font-weight: bold;
+}
+.create-view > main > section > a:hover {
+  background-color: #e7e3eb;
+}
+.create-view > main > section > a > p {
+  margin-top: 20px;
+  color: #7a6eaa;
+}
 .user-info > .connect-button {
   display: flex;
   align-items: center;
