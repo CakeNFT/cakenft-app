@@ -1,6 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
-import { SkyRouter, View, ViewParams } from "skyrouter";
+import { View, ViewParams } from "skyrouter";
 import Layout from "./Layout";
+import ViewUtil from "./ViewUtil";
 
 export default class Create implements View {
 
@@ -14,7 +15,7 @@ export default class Create implements View {
                     el("a",
                         el("h3", "Create new item"),
                         el("p", "Create new NFT Simple & Easy"),
-                        { click: () => SkyRouter.go("/create/one") },
+                        { click: () => ViewUtil.go("/create/one") },
                     ),
                 ),
                 el("section",
@@ -23,12 +24,12 @@ export default class Create implements View {
                     el("a",
                         el("h3", "Create Deployer Mint NFT"),
                         el("p", "Mint deployer only"),
-                        { click: () => SkyRouter.go("/create/deployer-mint-nft") },
+                        { click: () => ViewUtil.go("/create/deployer-mint-nft") },
                     ),
                     el("a",
                         el("h3", "Create User Mint NFT"),
                         el("p", "Mint everyone"),
-                        { click: () => SkyRouter.go("/create/user-mint-nft") },
+                        { click: () => ViewUtil.go("/create/user-mint-nft") },
                     ),
                 ),
             ),

@@ -8,6 +8,11 @@ export default class CreateDeployerMintNFT implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el(".create-deployer-mint-nft-view",
+            el("h1", "Create Deployer Mint NFT"),
+            el("label",
+                "Name *",
+                el("input", { placeholder: "NFT Name" }),
+            ),
         ));
     }
 

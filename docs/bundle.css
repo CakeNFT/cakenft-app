@@ -159,7 +159,8 @@ input {
   clear: both;
   visibility: hidden;
 }
-body {
+body,
+input {
   font-family: Kanit;
 }
 a {
@@ -332,6 +333,67 @@ a {
 .create-view > main > section > a > p {
   margin-top: 20px;
   color: #7a6eaa;
+}
+.create-user-mint-nft-view {
+  max-width: 720px;
+  padding: 50px 20px;
+  margin: auto;
+}
+.create-user-mint-nft-view > h1 {
+  color: #7645d9;
+  font-size: 48px;
+  font-weight: bold;
+  padding-bottom: 32px;
+}
+.create-user-mint-nft-view > label {
+  display: block;
+  margin-bottom: 24px;
+  color: #280d5f;
+  text-transform: uppercase;
+}
+.create-user-mint-nft-view > label > input {
+  display: block;
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #d7caec;
+  height: 40px;
+  padding: 0 16px;
+  color: #280d5f;
+  font-size: 16px;
+  box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
+  background-color: #eeeaf4;
+}
+.create-user-mint-nft-view > label > input:focus {
+  box-shadow: #7645d9 0px 0px 0px 1px, rgba(118, 69, 217, 0.6) 0px 0px 0px 4px;
+}
+.create-user-mint-nft-view > label > input::placeholder {
+  color: #7a6eaa;
+}
+.create-user-mint-nft-view > .submit-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: #1fc7d4;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px 0px inset;
+}
+.create-user-mint-nft-view > .submit-button:hover {
+  background-color: #6edbe3;
+}
+.create-deployer-mint-nft-view {
+  max-width: 720px;
+  padding: 50px 20px;
+  margin: auto;
+}
+.create-deployer-mint-nft-view > h1 {
+  color: #7645d9;
+  font-size: 48px;
+  font-weight: bold;
+  padding-bottom: 32px;
 }
 .user-info > .connect-button {
   display: flex;
