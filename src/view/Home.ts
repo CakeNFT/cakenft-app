@@ -8,6 +8,7 @@ export default class Home implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el(".home-view",
+            "Home",
         ));
     }
 

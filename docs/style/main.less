@@ -1,3 +1,32 @@
 @import "base.less";
 
+body {
+    font-family: Kanit;
+}
+
+a {
+    color          : inherit;
+    text-decoration: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background   : rgb(122, 110, 170);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow   : rgb(238 234 244) 0px 0px 5px inset;
+    border-radius: 10px;
+}
+
 @import "view/layout.less";
+
+@import "ui/user-info.less";
+
+@import "ui/menu/pc-menu.less";
+@import "ui/menu/user-menu.less";
+@import "ui/menu/mobile-menu.less";

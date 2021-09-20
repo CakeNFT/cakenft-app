@@ -159,22 +159,174 @@ input {
   clear: both;
   visibility: hidden;
 }
+body {
+  font-family: Kanit;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #7a6eaa;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: #eeeaf4 0px 0px 5px inset;
+  border-radius: 10px;
+}
+.layout {
+  padding-top: 57px;
+}
+.layout > header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #e7e3eb;
+  padding: 4px 16px;
+  box-shadow: rgba(4, 17, 29, 0.25) 0px 0px 8px 0px;
+}
+.layout > header > .logo {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 24px;
+}
 @media only screen and (max-width: 719px) {
   .layout > header > .pc-menu {
     display: none;
   }
 }
+.layout > header > .span {
+  flex-grow: 1;
+}
+@media only screen and (max-width: 719px) {
+  .layout > header > .user-info {
+    display: none;
+  }
+}
 .layout > header > .menu-button {
   display: none;
-  position: fixed;
-  right: 10px;
-  top: 12px;
-  z-index: 2;
-  padding: 10px;
+  color: #7a6eaa;
+  height: 48px;
+  padding: 0 16px;
+  align-items: center;
+  font-size: 18px;
+}
+.layout > header > .menu-button:hover {
+  background-color: #eff4f5;
+  border-radius: 16px;
 }
 @media only screen and (max-width: 719px) {
   .layout > header > .menu-button {
-    display: block;
+    display: flex;
   }
+}
+.layout > footer {
+  background-color: #27262c;
+  padding: 56px 40px 32px;
+  font-weight: bold;
+}
+.layout > footer > section > h4 {
+  color: #9a6aff;
+  text-transform: uppercase;
+}
+.layout > footer > section li {
+  margin-top: 10px;
+}
+.layout > footer > section a {
+  color: #f4eeff;
+}
+.layout > footer > section a:hover {
+  text-decoration: underline;
+}
+.layout > footer > .social {
+  padding: 20px 0;
+  color: #b8add2;
+  font-size: 24px;
+}
+.layout > footer > .copyright {
+  padding: 20px 0;
+  border-top: 1px solid #383241;
+  color: #b8add2;
+}
+.user-info > .connect-button {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 32px;
+  background-color: #1fc7d4;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px 0px inset;
+}
+.user-info > .connect-button:hover {
+  background-color: #6edbe3;
+}
+.user-info > .user-button {
+  padding: 10px;
+  color: #7a6eaa;
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.user-info > .user-button:hover {
+  background-color: #eff4f5;
+  border-radius: 16px;
+}
+.pc-menu {
+  display: flex;
+  color: #7a6eaa;
+}
+.pc-menu > a {
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+.pc-menu > a:hover {
+  background-color: #eff4f5;
+  border-radius: 16px;
+  padding: 16px;
+}
+.user-menu {
+  width: 220px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+  background-color: #ffffff;
+  color: #7a6eaa;
+  border-radius: 5px;
+}
+.user-menu > a {
+  display: block;
+  border-bottom: 1px solid #e7e3eb;
+  padding: 16px;
+}
+.user-menu > a:hover {
+  background-color: #eff4f5;
+}
+.mobile-menu {
+  width: 220px;
+  position: fixed;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 4px 16px;
+  background-color: #ffffff;
+  color: #7a6eaa;
+  border-radius: 5px;
+}
+.mobile-menu > a {
+  display: block;
+  border-bottom: 1px solid #e7e3eb;
+  padding: 16px;
+}
+.mobile-menu > a:hover {
+  background-color: #eff4f5;
 }
 
