@@ -396,6 +396,21 @@ a {
   font-weight: bold;
   padding-bottom: 32px;
 }
+.update-view {
+  background-color: #faf9fa;
+}
+.update-view > main {
+  max-width: 720px;
+  padding: 50px 20px;
+  margin: auto;
+}
+.update-view > main > h1 {
+  color: #7645d9;
+  font-size: 48px;
+  font-weight: bold;
+  padding-bottom: 32px;
+  border-bottom: 2px solid #7a6eaa;
+}
 .user-info > .connect-button {
   display: flex;
   align-items: center;
