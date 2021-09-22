@@ -1,5 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
 import superagent from "superagent";
+import Config from "../Config";
 
 export default class ImageUploadForm extends DomNode {
 
@@ -97,7 +98,7 @@ export default class ImageUploadForm extends DomNode {
         this.percent.style({ display: "block" });
         this.setPercent(0);
 
-        const request = superagent.post("https://localhost:9013/image-upload");
+        const request = superagent.post(`${Config.api}/image-upload`);
         request.attach(file.name, file);
         request.on("progress", (event) => {
             if (event.percent !== undefined) {

@@ -1,0 +1,59 @@
+.image-upload-form {
+    border             : 3px dashed rgb(229, 232, 235);
+    border-radius      : 5px;
+    display            : flex;
+    align-items        : center;
+    height             : 256px;
+    cursor             : pointer;
+    background-repeat  : no-repeat;
+    background-size    : contain;
+    background-position: center center;
+
+    >.guide {
+        color     : rgb(170, 170, 170);
+        text-align: center;
+        width     : 100%;
+
+        >i {
+            font-size: 60px;
+        }
+
+        >header {
+            margin-top   : 15px;
+            margin-bottom: 10px;
+            font-size    : 18px;
+            font-weight  : bold;
+        }
+    }
+
+    >.error {
+        text-align: center;
+        width     : 100%;
+        color     : red;
+    }
+
+    >.percent {
+        text-align: center;
+        width     : 100%;
+        color     : rgb(170, 170, 170);
+
+        >.bar {
+            background   : #F8F9FA;
+            border       : 0.5px solid rgba(33, 37, 41, 0.14);
+            box-sizing   : border-box;
+            border-radius: 8px;
+            width        : 160px;
+            margin       : auto;
+            margin-bottom: 10px;
+            height       : 8px;
+
+            >.fluid {
+                background   : #4589FF;
+                border       : 0.5px solid rgba(33, 37, 41, 0.14);
+                box-sizing   : border-box;
+                border-radius: 8px;
+                height       : 8px;
+            }
+        }
+    }
+}

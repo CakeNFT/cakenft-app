@@ -160,7 +160,8 @@ input {
   visibility: hidden;
 }
 body,
-input {
+input,
+textarea {
   font-family: Kanit;
 }
 a {
@@ -350,6 +351,7 @@ a {
   margin-bottom: 24px;
   color: #280d5f;
   text-transform: uppercase;
+  font-weight: bold;
 }
 .create-user-mint-nft-view > form > label > input {
   display: block;
@@ -399,17 +401,90 @@ a {
 .update-view {
   background-color: #faf9fa;
 }
-.update-view > main {
+.update-view > form {
   max-width: 720px;
   padding: 50px 20px;
   margin: auto;
 }
-.update-view > main > h1 {
+.update-view > form > h1 {
   color: #7645d9;
   font-size: 48px;
   font-weight: bold;
   padding-bottom: 32px;
   border-bottom: 2px solid #7a6eaa;
+}
+.update-view > form > .image-upload-form {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.update-view > form > label {
+  display: block;
+  margin-bottom: 30px;
+  color: #280d5f;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.update-view > form > label > p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-transform: none;
+  font-weight: normal;
+}
+.update-view > form > label > input {
+  display: block;
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #d7caec;
+  height: 40px;
+  padding: 0 16px;
+  color: #280d5f;
+  font-size: 16px;
+  box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
+  background-color: #eeeaf4;
+}
+.update-view > form > label > input:focus {
+  box-shadow: #7645d9 0px 0px 0px 1px, rgba(118, 69, 217, 0.6) 0px 0px 0px 4px;
+}
+.update-view > form > label > input::placeholder {
+  color: #7a6eaa;
+}
+.update-view > form > label > textarea {
+  display: block;
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid #d7caec;
+  height: 114px;
+  padding: 8px 16px;
+  color: #280d5f;
+  font-size: 16px;
+  box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
+  background-color: #eeeaf4;
+}
+.update-view > form > label > textarea:focus {
+  box-shadow: #7645d9 0px 0px 0px 1px, rgba(118, 69, 217, 0.6) 0px 0px 0px 4px;
+}
+.update-view > form > label > textarea::placeholder {
+  color: #7a6eaa;
+}
+.update-view > form > .properties-form {
+  margin-bottom: 60px;
+}
+.update-view > form > input[type=submit] {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: #1fc7d4;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px 0px inset;
+  font-size: 16px;
+}
+.update-view > form > input[type=submit]:hover {
+  background-color: #6edbe3;
 }
 .user-info > .connect-button {
   display: flex;
@@ -437,6 +512,113 @@ a {
 .user-info > .user-button:hover {
   background-color: #eff4f5;
   border-radius: 16px;
+}
+.image-upload-form {
+  border: 3px dashed #e5e8eb;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  height: 256px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+.image-upload-form > .guide {
+  color: #aaaaaa;
+  text-align: center;
+  width: 100%;
+}
+.image-upload-form > .guide > i {
+  font-size: 60px;
+}
+.image-upload-form > .guide > header {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.image-upload-form > .error {
+  text-align: center;
+  width: 100%;
+  color: red;
+}
+.image-upload-form > .percent {
+  text-align: center;
+  width: 100%;
+  color: #aaaaaa;
+}
+.image-upload-form > .percent > .bar {
+  background: #F8F9FA;
+  border: 0.5px solid rgba(33, 37, 41, 0.14);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 160px;
+  margin: auto;
+  margin-bottom: 10px;
+  height: 8px;
+}
+.image-upload-form > .percent > .bar > .fluid {
+  background: #4589FF;
+  border: 0.5px solid rgba(33, 37, 41, 0.14);
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 8px;
+}
+.properties-form > h4 {
+  color: #280d5f;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.properties-form > p {
+  margin-top: 10px;
+  color: #280d5f;
+}
+.properties-form > .add-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  color: #280d5f;
+  font-weight: bold;
+  border-radius: 16px;
+  border: 1px solid #280d5f;
+  font-size: 16px;
+}
+.properties-form > .property-form-list {
+  padding: 10px 0;
+}
+.properties-form > .property-form-list > .property-form {
+  display: flex;
+  margin: 10px 0;
+}
+.properties-form > .property-form-list > .property-form > .delete-button {
+  border-radius: 16px;
+  border: 1px solid #d7caec;
+  height: 40px;
+  padding: 0 16px;
+  color: #280d5f;
+  font-size: 20px;
+  background-color: #eeeaf4;
+  display: flex;
+  align-items: center;
+}
+.properties-form > .property-form-list > .property-form > input {
+  margin-left: 6px;
+  border-radius: 16px;
+  border: 1px solid #d7caec;
+  height: 40px;
+  padding: 0 16px;
+  color: #280d5f;
+  font-size: 16px;
+  box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
+  background-color: #eeeaf4;
+}
+.properties-form > .property-form-list > .property-form > input:focus {
+  box-shadow: #7645d9 0px 0px 0px 1px, rgba(118, 69, 217, 0.6) 0px 0px 0px 4px;
+}
+.properties-form > .property-form-list > .property-form > input::placeholder {
+  color: #7a6eaa;
 }
 .pc-menu {
   display: flex;
