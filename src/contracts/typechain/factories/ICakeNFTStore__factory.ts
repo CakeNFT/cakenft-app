@@ -1164,6 +1164,25 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+    ],
+    name: "totalTradingVolumes",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "contract IUserMintNFT",
         name: "nft",
         type: "address",

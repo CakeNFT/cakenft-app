@@ -65,6 +65,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "setOwnerFee(uint256)": FunctionFragment;
     "stakedCakeBalances(address,uint256)": FunctionFragment;
     "totalStakedCakeBalance()": FunctionFragment;
+    "totalTradingVolumes(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "userMint(address)": FunctionFragment;
     "vault()": FunctionFragment;
@@ -236,6 +237,10 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "totalTradingVolumes",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
@@ -337,6 +342,10 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "totalStakedCakeBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalTradingVolumes",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -893,6 +902,16 @@ export class CakeNFTStore extends Contract {
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    totalTradingVolumes(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "totalTradingVolumes(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides
@@ -1415,6 +1434,16 @@ export class CakeNFTStore extends Contract {
 
   "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+  totalTradingVolumes(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "totalTradingVolumes(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides
@@ -1930,6 +1959,16 @@ export class CakeNFTStore extends Contract {
     totalStakedCakeBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalTradingVolumes(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "totalTradingVolumes(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -2514,6 +2553,16 @@ export class CakeNFTStore extends Contract {
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    totalTradingVolumes(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "totalTradingVolumes(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides
@@ -3017,6 +3066,16 @@ export class CakeNFTStore extends Contract {
     ): Promise<PopulatedTransaction>;
 
     "totalStakedCakeBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    totalTradingVolumes(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "totalTradingVolumes(address)"(
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

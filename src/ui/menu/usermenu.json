@@ -2,6 +2,9 @@
     "menu": [{
             "uri": "user/{address}/nfts",
             "name": "My NFTs"
+        }, {
+            "uri": "user/{address}/arts",
+            "name": "My Arts"
         },
         {
             "uri": "user/{address}/collections",

@@ -53,6 +53,7 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     "set(address,uint256,uint256)": FunctionFragment;
     "stakedCakeBalances(address,uint256)": FunctionFragment;
     "totalStakedCakeBalance()": FunctionFragment;
+    "totalTradingVolumes(address)": FunctionFragment;
     "userMint(address)": FunctionFragment;
   };
 
@@ -188,6 +189,10 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "totalStakedCakeBalance",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "totalTradingVolumes",
+    values: [string]
+  ): string;
   encodeFunctionData(functionFragment: "userMint", values: [string]): string;
 
   decodeFunctionResult(
@@ -258,6 +263,10 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "totalStakedCakeBalance",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalTradingVolumes",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "userMint", data: BytesLike): Result;
@@ -687,6 +696,16 @@ export class ICakeNFTStore extends Contract {
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    totalTradingVolumes(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "totalTradingVolumes(address)"(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     userMint(nft: string, overrides?: Overrides): Promise<ContractTransaction>;
 
     "userMint(address)"(
@@ -1074,6 +1093,16 @@ export class ICakeNFTStore extends Contract {
   totalStakedCakeBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  totalTradingVolumes(
+    nft: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "totalTradingVolumes(address)"(
+    nft: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   userMint(nft: string, overrides?: Overrides): Promise<ContractTransaction>;
 
@@ -1471,6 +1500,16 @@ export class ICakeNFTStore extends Contract {
     totalStakedCakeBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    totalTradingVolumes(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "totalTradingVolumes(address)"(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     userMint(nft: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1946,6 +1985,16 @@ export class ICakeNFTStore extends Contract {
 
     "totalStakedCakeBalance()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    totalTradingVolumes(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "totalTradingVolumes(address)"(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     userMint(nft: string, overrides?: Overrides): Promise<BigNumber>;
 
     "userMint(address)"(nft: string, overrides?: Overrides): Promise<BigNumber>;
@@ -2333,6 +2382,16 @@ export class ICakeNFTStore extends Contract {
     ): Promise<PopulatedTransaction>;
 
     "totalStakedCakeBalance()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    totalTradingVolumes(
+      nft: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "totalTradingVolumes(address)"(
+      nft: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

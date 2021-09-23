@@ -19,8 +19,8 @@ export default class Create implements View {
                 el("h1", "Create NFTs"),
                 el("section",
                     el("a",
-                        el("h3", "Create new item"),
-                        el("p", "Create new NFT Simple & Easy"),
+                        el("h3", "Create new art"),
+                        el("p", "Create new NFT art Simple & Easy"),
                         {
                             click: async () => {
                                 this.minting = new Minting();
