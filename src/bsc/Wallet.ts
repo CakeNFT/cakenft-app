@@ -280,6 +280,10 @@ class Wallet extends EventContainer {
 
         return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
+
+    public async signMessage(message: string) {
+        return await this.signer.signMessage(message);
+    }
 }
 
 export default new Wallet();

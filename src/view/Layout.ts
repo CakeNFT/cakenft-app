@@ -1,10 +1,10 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
-import { SkyRouter, View } from "skyrouter";
+import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
 import MobileMenu from "../ui/menu/MobileMenu";
 import PCMenu from "../ui/menu/PCMenu";
-import UserMenu from "../ui/menu/UserMenu";
 import UserInfo from "../ui/UserInfo";
+import ViewUtil from "./ViewUtil";
 
 export default class Layout implements View {
 
@@ -20,7 +20,7 @@ export default class Layout implements View {
                 el("a.logo",
                     el("img", { src: "/images/logo.png", height: "40" }),
                     "CakeNFT",
-                    { click: () => SkyRouter.go("/") },
+                    { click: () => ViewUtil.go("/") },
                 ),
                 new PCMenu(),
                 el(".span"),
