@@ -1,10 +1,10 @@
 {
     "menu": [{
-            "uri": "user/my-nfts",
+            "uri": "user/{address}/nfts",
             "name": "My NFTs"
         },
         {
-            "uri": "user/my-collections",
+            "uri": "user/{address}/collections",
             "name": "My Collections"
         }
     ]

@@ -4,7 +4,7 @@ import { constants } from "ethers";
 import { View, ViewParams } from "skyrouter";
 import Wallet from "../bsc/Wallet";
 import CakeSimpleNFTV1Contract from "../contracts/CakeSimpleNFTV1Contract";
-import Minting from "../ui/loading/Minting";
+import Minting from "../component/loading/Minting";
 import Layout from "./Layout";
 import ViewUtil from "./ViewUtil";
 

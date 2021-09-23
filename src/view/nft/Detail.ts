@@ -5,7 +5,7 @@ import Config from "../../Config";
 import CakeSimpleNFTV1Contract from "../../contracts/CakeSimpleNFTV1Contract";
 import NFTContract from "../../contracts/NFTContract";
 import NFTMetatdata from "../../NFTMetatdata";
-import NFTLoading from "../../ui/loading/NFTLoading";
+import NFTLoading from "../../component/loading/NFTLoading";
 import Layout from "../Layout";
 import ViewUtil from "../ViewUtil";
 

@@ -4,7 +4,7 @@ interface Menu {
     name: string;
 }
 declare class MenuBuilder {
-    build(menus: Menu[]): DomNode<HTMLElement>[];
+    build(menus: Menu[], address?: string): DomNode<HTMLElement>[];
 }
 declare const _default: MenuBuilder;
 export default _default;

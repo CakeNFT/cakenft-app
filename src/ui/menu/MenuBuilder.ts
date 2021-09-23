@@ -8,12 +8,13 @@ interface Menu {
 
 class MenuBuilder {
 
-    public build(menus: Menu[]) {
+    public build(menus: Menu[], address?: string) {
         const els: DomNode[] = [];
         for (const menuItem of menus) {
-            els.push(el(`a${location.pathname === `/${menuItem.uri}` ? ".on" : ""}`,
+            const uri = address === undefined ? menuItem.uri : menuItem.uri.replace(/{address}/g, address);
+            els.push(el(`a${location.pathname === `/${uri}` ? ".on" : ""}`,
                 menuItem.name,
-                { click: () => ViewUtil.go(`/${menuItem.uri}`) },
+                { click: () => ViewUtil.go(`/${uri}`) },
             ));
         }
         return els;
