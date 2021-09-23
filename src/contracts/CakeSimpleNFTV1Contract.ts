@@ -1,3 +1,4 @@
+import { BigNumberish } from "@ethersproject/bignumber";
 import Config from "../Config";
 import CakeSimpleNFTV1Artifact from "./artifacts/contracts/CakeSimpleNFTV1.sol/CakeSimpleNFTV1.json";
 import ERC721Contract from "./standard/ERC721Contract";
@@ -7,6 +8,10 @@ class CakeSimpleNFTV1Contract extends ERC721Contract<CakeSimpleNFTV1> {
 
     constructor() {
         super(Config.contracts.CakeSimpleNFTV1, CakeSimpleNFTV1Artifact.abi, []);
+    }
+
+    public async getArtist(tokenId: BigNumberish): Promise<string> {
+        return await this.contract.artists(tokenId);
     }
 
     public async mint() {

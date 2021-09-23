@@ -1,15 +1,81 @@
 .detail-view {
     display: flex;
 
-    >.art {
-        width: 50%;
+    @media @phone {
+        display: block;
+    }
 
-        >img {
-            width: 100%;
+    >.art-container {
+        width        : 50%;
+        padding      : 20px;
+        padding-right: 10px;
+
+        @media @phone {
+            width        : auto;
+            padding-right: 20px;
+        }
+
+        >.art {
+            padding            : 20px;
+            background-color   : #ffffff;
+            border-radius      : 24px;
+            border             : 1px solid rgb(231, 227, 235);
+            border-bottom-width: 4px;
+
+            >img {
+                width     : auto;
+                height    : auto;
+                max-width : 100%;
+                max-height: 100%;
+            }
         }
     }
 
     >.info {
-        width: 50%;
+        width       : 50%;
+        padding     : 20px;
+        padding-left: 10px;
+
+        @media @phone {
+            width       : auto;
+            padding-left: 20px;
+        }
+
+        >.collection {}
+
+        >h1 {
+            margin-top   : 20px;
+            color        : rgb(118, 69, 217);
+            font-size    : 48px;
+            font-weight  : bold;
+            margin-bottom: 20px;
+        }
+
+        >.owner {
+            margin-bottom: 20px;
+
+            >a {
+                text-decoration: underline;
+            }
+        }
+
+        >.controller {
+            >a {
+                display         : inline-flex;
+                align-items     : center;
+                padding         : 0 24px;
+                height          : 48px;
+                background-color: rgb(31, 199, 212);
+                color           : #ffffff;
+                font-weight     : bold;
+                border-radius   : 16px;
+                box-shadow      : rgb(14 14 44 / 40%) 0px -1px 0px 0px inset;
+                font-size       : 16px;
+
+                &:hover {
+                    background-color: #6edbe3;
+                }
+            }
+        }
     }
 }

@@ -1,10 +1,13 @@
 import { DomNode, el } from "@hanul/skynode";
 import { View, ViewParams } from "skyrouter";
 import CommonUtil from "../../CommonUtil";
+import Config from "../../Config";
+import CakeSimpleNFTV1Contract from "../../contracts/CakeSimpleNFTV1Contract";
 import NFTContract from "../../contracts/NFTContract";
 import NFTMetatdata from "../../NFTMetatdata";
 import NFTLoading from "../../ui/loading/NFTLoading";
 import Layout from "../Layout";
+import ViewUtil from "../ViewUtil";
 
 export default class Detail implements View {
 
@@ -30,18 +33,34 @@ export default class Detail implements View {
                 this.contract = new NFTContract(address);
             }
 
+            const isCakeNFT = this.contract.address === Config.contracts.CakeSimpleNFTV1;
+
+            const collectionName = isCakeNFT ?
+                CommonUtil.shortenAddress(await CakeSimpleNFTV1Contract.getArtist(id)) :
+                await this.contract.getName();
+
             const uri = await this.contract.getTokenURI(id);
             const owner = await this.contract.ownerOf(id);
             const result = await fetch(uri);
             const metadata: NFTMetatdata = await result.json();
 
             this.container.empty().append(
-                el(".art",
-                    el("img", { src: metadata.image }),
+                el(".art-container",
+                    el(".art",
+                        el("img", { src: metadata.image }),
+                    ),
                 ),
                 el(".info",
+                    el("a.collection", collectionName, {
+                        click: () => ViewUtil.go(isCakeNFT ? `/user/${owner}/arts`: `/${address}`),
+                    }),
                     el("h1", metadata.name),
-                    el(".owner", "Owned by ", el("a", CommonUtil.shortenAddress(owner))),
+                    el(".owner", "Owned by ", el("a", CommonUtil.shortenAddress(owner)), {
+                        click: () => ViewUtil.go(`/user/${owner}/nfts`),
+                    }),
+                    el(".controller",
+                        el("a.offer-button", "Make Offer"),
+                    ),
                 ),
             );
         }

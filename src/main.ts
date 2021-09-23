@@ -9,8 +9,8 @@ import Marketplace from "./view/Marketplace";
 import Detail from "./view/nft/Detail";
 import Update from "./view/nft/Update";
 import Ranking from "./view/Ranking";
-import MyCollections from "./view/user/MyCollections";
-import MyNFTs from "./view/user/MyNFTs";
+import UserCollections from "./view/user/UserCollections";
+import UserNFTs from "./view/user/UserNFTs";
 
 SkyRouter.route("**", Layout);
 SkyRouter.route("", Home);
@@ -21,8 +21,8 @@ SkyRouter.route("create", Create);
 SkyRouter.route("create/deployer-mint-nft", CreateDeployerMintNFT);
 SkyRouter.route("create/user-mint-nft", CreateUserMintNFT);
 
-SkyRouter.route("user/my-nfts", MyNFTs);
-SkyRouter.route("user/my-collections", MyCollections);
+SkyRouter.route("user/{address}/nfts", UserNFTs);
+SkyRouter.route("user/{address}/collections", UserCollections);
 
 SkyRouter.route("{address}", Collection, [
     "marketplace",
@@ -33,8 +33,6 @@ SkyRouter.route("{address}/{id}", Detail, [
     "create/one",
     "create/deployer-mint-nft",
     "create/user-mint-nft",
-    "user/my-nfts",
-    "user/my-collections",
 ]);
 SkyRouter.route("{address}/{id}/update", Update);
 

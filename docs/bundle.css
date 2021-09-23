@@ -401,14 +401,73 @@ a {
 .detail-view {
   display: flex;
 }
-.detail-view > .art {
-  width: 50%;
+@media only screen and (max-width: 719px) {
+  .detail-view {
+    display: block;
+  }
 }
-.detail-view > .art > img {
-  width: 100%;
+.detail-view > .art-container {
+  width: 50%;
+  padding: 20px;
+  padding-right: 10px;
+}
+@media only screen and (max-width: 719px) {
+  .detail-view > .art-container {
+    width: auto;
+    padding-right: 20px;
+  }
+}
+.detail-view > .art-container > .art {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e7e3eb;
+  border-bottom-width: 4px;
+}
+.detail-view > .art-container > .art > img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 .detail-view > .info {
   width: 50%;
+  padding: 20px;
+  padding-left: 10px;
+}
+@media only screen and (max-width: 719px) {
+  .detail-view > .info {
+    width: auto;
+    padding-left: 20px;
+  }
+}
+.detail-view > .info > h1 {
+  margin-top: 20px;
+  color: #7645d9;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.detail-view > .info > .owner {
+  margin-bottom: 20px;
+}
+.detail-view > .info > .owner > a {
+  text-decoration: underline;
+}
+.detail-view > .info > .controller > a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+  background-color: #1fc7d4;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 16px;
+  box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px 0px inset;
+  font-size: 16px;
+}
+.detail-view > .info > .controller > a:hover {
+  background-color: #6edbe3;
 }
 .update-view {
   background-color: #faf9fa;
