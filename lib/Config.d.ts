@@ -2,6 +2,7 @@ declare const _default: {
     chainId: number;
     rpc: string;
     api: string;
+    blockTimeSecond: number;
     contracts: {
         Cake: string;
         CakeNFTStore: string;

@@ -19,6 +19,10 @@ export default class ERC721Contract<CT extends ethers.Contract> extends Contract
         return await this.contract.balanceOf(owner);
     }
 
+    public async ownerOf(id: BigNumberish): Promise<string> {
+        return await this.contract.ownerOf(id);
+    }
+
     public async getNonce(id: BigNumberish): Promise<BigNumber> {
         return await this.contract.nonces(id);
     }

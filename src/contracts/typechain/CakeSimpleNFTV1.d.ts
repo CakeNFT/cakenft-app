@@ -25,6 +25,7 @@ interface CakeSimpleNFTV1Interface extends ethers.utils.Interface {
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "PERMIT_TYPEHASH()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
+    "artists(uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "burn(uint256)": FunctionFragment;
     "count()": FunctionFragment;
@@ -58,6 +59,10 @@ interface CakeSimpleNFTV1Interface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "approve",
     values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "artists",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
@@ -135,6 +140,7 @@ interface CakeSimpleNFTV1Interface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "artists", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "count", data: BytesLike): Result;
@@ -227,6 +233,13 @@ export class CakeSimpleNFTV1 extends Contract {
       tokenId: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    artists(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+
+    "artists(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -429,6 +442,13 @@ export class CakeSimpleNFTV1 extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  artists(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  "artists(uint256)"(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "balanceOf(address)"(
@@ -623,6 +643,13 @@ export class CakeSimpleNFTV1 extends Contract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    artists(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    "artists(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -837,6 +864,13 @@ export class CakeSimpleNFTV1 extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    artists(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "artists(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
@@ -1041,6 +1075,16 @@ export class CakeSimpleNFTV1 extends Contract {
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    artists(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "artists(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     balanceOf(

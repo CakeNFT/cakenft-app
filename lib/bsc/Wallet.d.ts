@@ -45,6 +45,7 @@ declare class Wallet extends EventContainer {
         r: string;
         s: string;
     }>;
+    signMessage(message: string): Promise<string>;
 }
 declare const _default: Wallet;
 export default _default;

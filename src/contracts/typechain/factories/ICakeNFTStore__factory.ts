@@ -543,6 +543,40 @@ const _abi = [
         name: "nftId",
         type: "uint256",
       },
+    ],
+    name: "auctions",
+    outputs: [
+      {
+        internalType: "address",
+        name: "seller",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "startPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "endBlock",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
       {
         internalType: "uint256",
         name: "price",
@@ -554,6 +588,64 @@ const _abi = [
       {
         internalType: "uint256",
         name: "biddingId",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
+    ],
+    name: "biddingCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "biddings",
+    outputs: [
+      {
+        internalType: "address",
+        name: "bidder",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
         type: "uint256",
       },
     ],
@@ -796,6 +888,38 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "nftCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "nfts",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "contract IERC721",
@@ -818,6 +942,93 @@ const _abi = [
       {
         internalType: "uint256",
         name: "offerId",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
+    ],
+    name: "offerCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "offers",
+    outputs: [
+      {
+        internalType: "address",
+        name: "offeror",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IERC721",
+        name: "nft",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256",
+      },
+    ],
+    name: "sales",
+    outputs: [
+      {
+        internalType: "address",
+        name: "seller",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "price",
         type: "uint256",
       },
     ],

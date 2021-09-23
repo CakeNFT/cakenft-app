@@ -28,6 +28,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "auctionWithPermit(address,uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "auctions(address,uint256)": FunctionFragment;
     "bid(address,uint256,uint256)": FunctionFragment;
+    "biddingCount(address,uint256)": FunctionFragment;
     "biddings(address,uint256,uint256)": FunctionFragment;
     "buy(address,uint256)": FunctionFragment;
     "cake()": FunctionFragment;
@@ -43,8 +44,11 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "claimed(address,uint256)": FunctionFragment;
     "claimedCakeOf(address,uint256)": FunctionFragment;
     "initSolds(address)": FunctionFragment;
+    "nftCount()": FunctionFragment;
     "nftDeployers(address)": FunctionFragment;
+    "nfts(uint256)": FunctionFragment;
     "offer(address,uint256,uint256)": FunctionFragment;
+    "offerCount(address,uint256)": FunctionFragment;
     "offers(address,uint256,uint256)": FunctionFragment;
     "oracle()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -100,6 +104,10 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "biddingCount",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "biddings",
     values: [string, BigNumberish, BigNumberish]
   ): string;
@@ -153,13 +161,19 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "initSolds", values: [string]): string;
+  encodeFunctionData(functionFragment: "nftCount", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "nftDeployers",
     values: [string]
   ): string;
+  encodeFunctionData(functionFragment: "nfts", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "offer",
     values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "offerCount",
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "offers",
@@ -243,6 +257,10 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "auctions", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "bid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "biddingCount",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "biddings", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cake", data: BytesLike): Result;
@@ -276,11 +294,14 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "initSolds", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nftCount", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nftDeployers",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "nfts", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offer", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "offerCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offers", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "oracle", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -476,6 +497,18 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     biddings(
       arg0: string,
       arg1: BigNumberish,
@@ -639,6 +672,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    nftCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     nftDeployers(
       arg0: string,
       overrides?: CallOverrides
@@ -661,6 +698,13 @@ export class CakeNFTStore extends Contract {
       }
     >;
 
+    nfts(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+
+    "nfts(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -674,6 +718,18 @@ export class CakeNFTStore extends Contract {
       price: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     offers(
       arg0: string,
@@ -963,6 +1019,18 @@ export class CakeNFTStore extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  biddingCount(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "biddingCount(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   biddings(
     arg0: string,
     arg1: BigNumberish,
@@ -1126,6 +1194,10 @@ export class CakeNFTStore extends Contract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   nftDeployers(
     arg0: string,
     overrides?: CallOverrides
@@ -1148,6 +1220,13 @@ export class CakeNFTStore extends Contract {
     }
   >;
 
+  nfts(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  "nfts(uint256)"(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   offer(
     nft: string,
     nftId: BigNumberish,
@@ -1161,6 +1240,18 @@ export class CakeNFTStore extends Contract {
     price: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
+
+  offerCount(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "offerCount(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   offers(
     arg0: string,
@@ -1450,6 +1541,18 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     biddings(
       arg0: string,
       arg1: BigNumberish,
@@ -1613,6 +1716,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     nftDeployers(
       arg0: string,
       overrides?: CallOverrides
@@ -1635,6 +1742,13 @@ export class CakeNFTStore extends Contract {
       }
     >;
 
+    nfts(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    "nfts(uint256)"(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -1646,6 +1760,18 @@ export class CakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2013,6 +2139,18 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     biddings(
       arg0: string,
       arg1: BigNumberish,
@@ -2176,10 +2314,21 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     nftDeployers(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "nftDeployers(address)"(
       arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    nfts(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nfts(uint256)"(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2195,6 +2344,18 @@ export class CakeNFTStore extends Contract {
       nftId: BigNumberish,
       price: BigNumberish,
       overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     offers(
@@ -2465,6 +2626,18 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     biddings(
       arg0: string,
       arg1: BigNumberish,
@@ -2631,6 +2804,10 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    nftCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     nftDeployers(
       arg0: string,
       overrides?: CallOverrides
@@ -2638,6 +2815,16 @@ export class CakeNFTStore extends Contract {
 
     "nftDeployers(address)"(
       arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    nfts(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "nfts(uint256)"(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2653,6 +2840,18 @@ export class CakeNFTStore extends Contract {
       nftId: BigNumberish,
       price: BigNumberish,
       overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     offers(

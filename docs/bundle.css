@@ -398,6 +398,18 @@ a {
   font-weight: bold;
   padding-bottom: 32px;
 }
+.detail-view {
+  display: flex;
+}
+.detail-view > .art {
+  width: 50%;
+}
+.detail-view > .art > img {
+  width: 100%;
+}
+.detail-view > .info {
+  width: 50%;
+}
 .update-view {
   background-color: #faf9fa;
 }
@@ -683,6 +695,24 @@ a {
   justify-content: center;
 }
 .minting > .animation {
+  margin: 0 auto;
+}
+.nft-loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  color: #280d5f;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nft-loading > .animation {
   margin: 0 auto;
 }
 

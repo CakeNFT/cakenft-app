@@ -26,7 +26,10 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     "accumulativeCakeOf(address,uint256)": FunctionFragment;
     "auction(address,uint256,uint256,uint256)": FunctionFragment;
     "auctionWithPermit(address,uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "auctions(address,uint256)": FunctionFragment;
     "bid(address,uint256,uint256)": FunctionFragment;
+    "biddingCount(address,uint256)": FunctionFragment;
+    "biddings(address,uint256,uint256)": FunctionFragment;
     "buy(address,uint256)": FunctionFragment;
     "cake()": FunctionFragment;
     "cakeStaker()": FunctionFragment;
@@ -39,7 +42,12 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     "claimCake(address,uint256)": FunctionFragment;
     "claimableCakeOf(address,uint256)": FunctionFragment;
     "claimedCakeOf(address,uint256)": FunctionFragment;
+    "nftCount()": FunctionFragment;
+    "nfts(uint256)": FunctionFragment;
     "offer(address,uint256,uint256)": FunctionFragment;
+    "offerCount(address,uint256)": FunctionFragment;
+    "offers(address,uint256,uint256)": FunctionFragment;
+    "sales(address,uint256)": FunctionFragment;
     "sell(address,uint256,uint256)": FunctionFragment;
     "sellWithPermit(address,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "set(address,uint256,uint256)": FunctionFragment;
@@ -74,7 +82,19 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "auctions",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "bid",
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "biddingCount",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "biddings",
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
@@ -122,9 +142,23 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "claimedCakeOf",
     values: [string, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "nftCount", values?: undefined): string;
+  encodeFunctionData(functionFragment: "nfts", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "offer",
     values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "offerCount",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "offers",
+    values: [string, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "sales",
+    values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "sell",
@@ -169,7 +203,13 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "auctionWithPermit",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "auctions", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "bid", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "biddingCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "biddings", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "buy", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cake", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "cakeStaker", data: BytesLike): Result;
@@ -200,7 +240,12 @@ interface ICakeNFTStoreInterface extends ethers.utils.Interface {
     functionFragment: "claimedCakeOf",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "nftCount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nfts", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offer", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "offerCount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "offers", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "sales", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "sell", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "sellWithPermit",
@@ -328,6 +373,18 @@ export class ICakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    auctions(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "auctions(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     bid(
       nft: string,
       nftId: BigNumberish,
@@ -339,6 +396,32 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    biddings(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "biddings(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -472,6 +555,20 @@ export class ICakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    nftCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    nfts(
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "nfts(uint256)"(
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -483,6 +580,44 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    offers(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "offers(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    sales(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "sales(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -626,6 +761,18 @@ export class ICakeNFTStore extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  auctions(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "auctions(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   bid(
     nft: string,
     nftId: BigNumberish,
@@ -637,6 +784,32 @@ export class ICakeNFTStore extends Contract {
     nft: string,
     nftId: BigNumberish,
     price: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  biddingCount(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "biddingCount(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  biddings(
+    nft: string,
+    nftId: BigNumberish,
+    index: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "biddings(address,uint256,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    index: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -770,6 +943,20 @@ export class ICakeNFTStore extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+  nfts(
+    index: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "nfts(uint256)"(
+    index: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   offer(
     nft: string,
     nftId: BigNumberish,
@@ -781,6 +968,44 @@ export class ICakeNFTStore extends Contract {
     nft: string,
     nftId: BigNumberish,
     price: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  offerCount(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "offerCount(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  offers(
+    nft: string,
+    nftId: BigNumberish,
+    index: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "offers(address,uint256,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
+    index: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  sales(
+    nft: string,
+    nftId: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "sales(address,uint256)"(
+    nft: string,
+    nftId: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -924,6 +1149,30 @@ export class ICakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    auctions(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, BigNumber, BigNumber] & {
+        seller: string;
+        startPrice: BigNumber;
+        endBlock: BigNumber;
+      }
+    >;
+
+    "auctions(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, BigNumber, BigNumber] & {
+        seller: string;
+        startPrice: BigNumber;
+        endBlock: BigNumber;
+      }
+    >;
+
     bid(
       nft: string,
       nftId: BigNumberish,
@@ -937,6 +1186,32 @@ export class ICakeNFTStore extends Contract {
       price: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    biddings(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { bidder: string; price: BigNumber }>;
+
+    "biddings(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { bidder: string; price: BigNumber }>;
 
     buy(
       nft: string,
@@ -1068,6 +1343,17 @@ export class ICakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nfts(index: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    "nfts(uint256)"(
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -1081,6 +1367,44 @@ export class ICakeNFTStore extends Contract {
       price: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    offers(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { offeror: string; price: BigNumber }>;
+
+    "offers(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { offeror: string; price: BigNumber }>;
+
+    sales(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { seller: string; price: BigNumber }>;
+
+    "sales(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber] & { seller: string; price: BigNumber }>;
 
     sell(
       nft: string,
@@ -1311,6 +1635,18 @@ export class ICakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    auctions(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "auctions(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     bid(
       nft: string,
       nftId: BigNumberish,
@@ -1322,6 +1658,32 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    biddings(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "biddings(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1455,6 +1817,17 @@ export class ICakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    nftCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nfts(index: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
+
+    "nfts(uint256)"(
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -1466,6 +1839,44 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    offers(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "offers(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    sales(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "sales(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1607,6 +2018,18 @@ export class ICakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    auctions(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "auctions(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     bid(
       nft: string,
       nftId: BigNumberish,
@@ -1618,6 +2041,32 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    biddingCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "biddingCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    biddings(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "biddings(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
@@ -1751,6 +2200,20 @@ export class ICakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    nftCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "nftCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    nfts(
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "nfts(uint256)"(
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     offer(
       nft: string,
       nftId: BigNumberish,
@@ -1762,6 +2225,44 @@ export class ICakeNFTStore extends Contract {
       nft: string,
       nftId: BigNumberish,
       price: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    offerCount(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "offerCount(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    offers(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "offers(address,uint256,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
+      index: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    sales(
+      nft: string,
+      nftId: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "sales(address,uint256)"(
+      nft: string,
+      nftId: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
