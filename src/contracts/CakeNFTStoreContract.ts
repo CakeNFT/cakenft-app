@@ -1,10 +1,15 @@
 import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
-import { utils } from "ethers";
-import Wallet from "../bsc/Wallet";
 import Config from "../Config";
 import CakeNFTStoreArtifact from "./artifacts/contracts/CakeNFTStore.sol/CakeNFTStore.json";
 import Contract from "./Contract";
 import { CakeNFTStore } from "./typechain/CakeNFTStore";
+
+export interface NFTInfo {
+    deployer: string,
+    cakeNFT: boolean,
+    staking: BigNumber,
+    fee: BigNumber,
+}
 
 class CakeNFTStoreContract extends Contract<CakeNFTStore> {
 
@@ -28,18 +33,22 @@ class CakeNFTStoreContract extends Contract<CakeNFTStore> {
         return await this.contract.nftCount();
     }
 
-    public async setNFTDeployer(
+    public async nfts(index: BigNumberish): Promise<string> {
+        return await this.contract.nfts(index);
+    }
+
+    public async nftInfos(address: string): Promise<NFTInfo> {
+        const [deployer, cakeNFT, staking, fee] = await this.contract.nftInfos(address);
+        return { deployer, cakeNFT, staking, fee };
+    }
+
+    public async set(
         nft: string,
-        deployer: string,
         staking: BigNumberish,
         fee: BigNumberish,
     ) {
         const contract = await this.loadWalletContract();
-        const messageHash = utils.solidityKeccak256(["address", "address", "uint256", "uint256"], [nft, deployer, staking, fee]);
-        const signature = await Wallet.signMessage(messageHash);
-        await contract?.setNFTDeployer(
-            nft, deployer, staking, fee, signature,
-        );
+        await contract?.set(nft, staking, fee);
     }
 }
 

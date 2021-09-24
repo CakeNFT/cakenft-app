@@ -45,7 +45,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "claimedCakeOf(address,uint256)": FunctionFragment;
     "initSolds(address)": FunctionFragment;
     "nftCount()": FunctionFragment;
-    "nftDeployers(address)": FunctionFragment;
+    "nftInfos(address)": FunctionFragment;
     "nfts(uint256)": FunctionFragment;
     "offer(address,uint256,uint256)": FunctionFragment;
     "offerCount(address,uint256)": FunctionFragment;
@@ -60,7 +60,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     "sell(address,uint256,uint256)": FunctionFragment;
     "sellWithPermit(address,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "set(address,uint256,uint256)": FunctionFragment;
-    "setNFTDeployer(address,address,uint256,uint256,bytes)": FunctionFragment;
+    "setNFTInfo(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setOracle(address)": FunctionFragment;
     "setOwnerFee(uint256)": FunctionFragment;
     "stakedCakeBalances(address,uint256)": FunctionFragment;
@@ -163,10 +163,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "initSolds", values: [string]): string;
   encodeFunctionData(functionFragment: "nftCount", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "nftDeployers",
-    values: [string]
-  ): string;
+  encodeFunctionData(functionFragment: "nftInfos", values: [string]): string;
   encodeFunctionData(functionFragment: "nfts", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "offer",
@@ -220,7 +217,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "setNFTDeployer",
+    functionFragment: "setNFTInfo",
     values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "setOracle", values: [string]): string;
@@ -300,10 +297,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "initSolds", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nftCount", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "nftDeployers",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "nftInfos", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nfts", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "offerCount", data: BytesLike): Result;
@@ -327,10 +321,7 @@ interface CakeNFTStoreInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "set", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setNFTDeployer",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "setNFTInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setOracle", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setOwnerFee",
@@ -685,23 +676,25 @@ export class CakeNFTStore extends Contract {
 
     "nftCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    nftDeployers(
+    nftInfos(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber] & {
+      [string, boolean, BigNumber, BigNumber] & {
         deployer: string;
+        cakeNFT: boolean;
         staking: BigNumber;
         fee: BigNumber;
       }
     >;
 
-    "nftDeployers(address)"(
+    "nftInfos(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber] & {
+      [string, boolean, BigNumber, BigNumber] & {
         deployer: string;
+        cakeNFT: boolean;
         staking: BigNumber;
         fee: BigNumber;
       }
@@ -848,7 +841,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    setNFTDeployer(
+    setNFTInfo(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -857,7 +850,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
+    "setNFTInfo(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -1217,23 +1210,25 @@ export class CakeNFTStore extends Contract {
 
   "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-  nftDeployers(
+  nftInfos(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [string, BigNumber, BigNumber] & {
+    [string, boolean, BigNumber, BigNumber] & {
       deployer: string;
+      cakeNFT: boolean;
       staking: BigNumber;
       fee: BigNumber;
     }
   >;
 
-  "nftDeployers(address)"(
+  "nftInfos(address)"(
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [string, BigNumber, BigNumber] & {
+    [string, boolean, BigNumber, BigNumber] & {
       deployer: string;
+      cakeNFT: boolean;
       staking: BigNumber;
       fee: BigNumber;
     }
@@ -1380,7 +1375,7 @@ export class CakeNFTStore extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  setNFTDeployer(
+  setNFTInfo(
     nft: string,
     deployer: string,
     staking: BigNumberish,
@@ -1389,7 +1384,7 @@ export class CakeNFTStore extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "setNFTDeployer(address,address,uint256,uint256,bytes)"(
+  "setNFTInfo(address,address,uint256,uint256,bytes)"(
     nft: string,
     deployer: string,
     staking: BigNumberish,
@@ -1749,23 +1744,25 @@ export class CakeNFTStore extends Contract {
 
     "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    nftDeployers(
+    nftInfos(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber] & {
+      [string, boolean, BigNumber, BigNumber] & {
         deployer: string;
+        cakeNFT: boolean;
         staking: BigNumber;
         fee: BigNumber;
       }
     >;
 
-    "nftDeployers(address)"(
+    "nftInfos(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber] & {
+      [string, boolean, BigNumber, BigNumber] & {
         deployer: string;
+        cakeNFT: boolean;
         staking: BigNumber;
         fee: BigNumber;
       }
@@ -1912,7 +1909,7 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setNFTDeployer(
+    setNFTInfo(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -1921,7 +1918,7 @@ export class CakeNFTStore extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
+    "setNFTInfo(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -2357,9 +2354,9 @@ export class CakeNFTStore extends Contract {
 
     "nftCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    nftDeployers(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    nftInfos(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    "nftDeployers(address)"(
+    "nftInfos(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2505,7 +2502,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    setNFTDeployer(
+    setNFTInfo(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -2514,7 +2511,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
+    "setNFTInfo(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -2857,12 +2854,12 @@ export class CakeNFTStore extends Contract {
 
     "nftCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    nftDeployers(
+    nftInfos(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "nftDeployers(address)"(
+    "nftInfos(address)"(
       arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -3011,7 +3008,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    setNFTDeployer(
+    setNFTInfo(
       nft: string,
       deployer: string,
       staking: BigNumberish,
@@ -3020,7 +3017,7 @@ export class CakeNFTStore extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "setNFTDeployer(address,address,uint256,uint256,bytes)"(
+    "setNFTInfo(address,address,uint256,uint256,bytes)"(
       nft: string,
       deployer: string,
       staking: BigNumberish,

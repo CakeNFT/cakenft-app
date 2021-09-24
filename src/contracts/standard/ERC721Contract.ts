@@ -1,4 +1,5 @@
-import { BigNumber, BigNumberish, ContractInterface, ethers } from "ethers";
+import { BigNumber, BigNumberish, constants, ContractInterface, ethers } from "ethers";
+import NetworkProvider from "../../bsc/NetworkProvider";
 import Contract from "../Contract";
 
 export default class ERC721Contract<CT extends ethers.Contract> extends Contract<CT> {
@@ -33,5 +34,12 @@ export default class ERC721Contract<CT extends ethers.Contract> extends Contract
 
     public async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
         return await this.contract.isApprovedForAll(owner, operator);
+    }
+
+    public async getMintedIds() {
+        const eventFilter = this.contract.filters.Transfer(constants.AddressZero);
+        const fromBlock = await NetworkProvider.getBlockNumber() - 4000;
+        const events = await this.contract.queryFilter(eventFilter, fromBlock);
+        console.log(events);
     }
 }

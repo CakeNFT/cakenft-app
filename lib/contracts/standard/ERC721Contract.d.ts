@@ -8,5 +8,6 @@ export default class ERC721Contract<CT extends ethers.Contract> extends Contract
     getNonce(id: BigNumberish): Promise<BigNumber>;
     getNonceForAll(owner: string): Promise<BigNumber>;
     isApprovedForAll(owner: string, operator: string): Promise<boolean>;
+    getMintedIds(): Promise<void>;
 }
 //# sourceMappingURL=ERC721Contract.d.ts.map
